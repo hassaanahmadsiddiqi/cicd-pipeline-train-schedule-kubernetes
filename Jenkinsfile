@@ -44,7 +44,7 @@ pipeline {
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh 'kubectl apply -f train-schedule-kube.yml'
+                sh java --version
                 )                
             }
         }
