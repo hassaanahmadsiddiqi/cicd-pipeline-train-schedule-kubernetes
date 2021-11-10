@@ -39,12 +39,15 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
-            when {
-                branch 'master'
-            }
+            
             steps {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh java --version
+                input 'Deploy to Production?'
+                milestone(1)
+                kubernetesDeploy(
+                    kubeconfigId: 'kubeconfig',
+                    configs: 'train-schedule-kube.yml',
+                    enableConfigSubstitution: true
+                )
                 )                
             }
         }
